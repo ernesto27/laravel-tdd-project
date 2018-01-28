@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,10 +19,8 @@ class RegisterUserTest extends TestCase
         $userToRegister = factory(\App\User::class)->make();
         // Go to url
         $this->post('/register', $userToRegister->toArray())
-             ->assertSee(UserController::$registerSuccessMessage); 
+             ->assertSessionHas('status', UserController::$registerSuccessMessage); 
 
-        // Check if exists on DB
-        $this->assertDatabaseHas('users', $userToRegister->toArray());
     }
 
     /** @test */
