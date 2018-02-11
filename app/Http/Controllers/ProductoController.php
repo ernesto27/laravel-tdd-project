@@ -31,21 +31,29 @@ class ProductoController extends Controller
 
     }
 
+
+    public function edit($id)
+    {
+        $producto = Producto::findOrFail($id);
+        return view('productos.edit', compact('producto'));
+    }
+
     public function update(Request $request, $id)
     {
         $this->doValidate();
 
         if(Auth::user()->id == $request->get('user_id')){
-            return $this->updateOrCreate($request, $id);
+            $this->updateOrCreate($request, $id);
+            return back()->with('status', 'El producto se edito correctamente');
         }
 
         abort(403, 'Unauthorized action.');
 
     }
 
-    protected function updateOrCreate($request, $id = null)
+    protected function updateOrCreate($request, $id = 0)
     {
-        $condition = ($id) ? ['id' => $id ] : [];
+        $condition = ['id' => $id ];
 
         return Producto::updateOrCreate($condition, [
             'titulo' => $request->get('titulo'),
@@ -53,7 +61,7 @@ class ProductoController extends Controller
             'precio' => $request->get('precio'),
             'cantidad' => $request->get('cantidad'),
             'categoria_id' => $request->get('categoria_id'),
-            'user_id' => 1
+            'user_id' => Auth::user()->id
         ]);
     }
 

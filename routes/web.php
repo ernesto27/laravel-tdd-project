@@ -23,6 +23,7 @@ Route::post('/login', 'UserController@login');
 
 Route::get('/producto/create', 'ProductoController@create');
 Route::post('/producto', 'ProductoController@store');
+Route::get('/producto/{id}/edit', 'ProductoController@edit');
 Route::put('/producto/{id}', 'ProductoController@update');
 
 
