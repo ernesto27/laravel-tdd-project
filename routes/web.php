@@ -24,5 +24,6 @@ Route::get('/login', 'UserController@showLogin');
 Route::post('/login', 'UserController@login');
 
 Route::post('/producto', 'ProductoController@store');
+Route::put('/producto/{id}', 'ProductoController@update');
 
 
