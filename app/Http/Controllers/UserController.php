@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Validator;
 use Illuminate\Http\Request;
@@ -50,15 +51,18 @@ class UserController extends Controller
                     ->first();
 
 
+
         if(!$user){
             return back()->with('status', self::$loginErrorMessage);
         }
 
 
         if(Hash::check($request->get('password'), $user->password)){
-
+            Auth::login($user);
             return back()->with('status', self::$loginSuccessMessage);
         }
+
+        die('Not valid password');
     }
 }
 

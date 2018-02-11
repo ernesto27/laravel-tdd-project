@@ -12,14 +12,22 @@ class ProductoController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('create');
+    }
+
+    public function create()
+    {
+        return view('productos.create');
     }
 
     public function store(Request $request)
     {
+
         $this->doValidate();
 
         $this->updateOrCreate($request);
+
+        return back()->with('status', 'El producto se agrego correctamente');
 
     }
 
