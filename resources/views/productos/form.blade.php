@@ -41,10 +41,19 @@
     </div>
 
     <div class="form-group">
-        <label>Categoria</label>
-        <input  name="categoria_id" class="form-control" value="{{ (isset($producto)) ? $producto->categoria_id : old('categoria_id') }}">
+        <label>Categoria</label> <br>
+        <select name="categoria_id" id="">
+            @foreach($categorias as $categoria)
+                <option value="{{ $categoria->id }}"
+                        {{ (isset($producto) and $producto->categoria_id == $categoria->id
+                            or (old('categoria_id') == $categoria->id))
+                            ? 'selected'
+                            : '' }}>
+                    {{ $categoria->nombre }}
+                </option>
+            @endforeach
+        </select>
     </div>
-
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

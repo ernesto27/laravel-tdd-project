@@ -24,13 +24,20 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 
 $factory->define(App\Producto::class, function (Faker $faker){
-
     return [
         'titulo' => $faker->title,
         'descripcion' => $faker->text,
         'precio' => $faker->randomFloat(),
         'cantidad' => $faker->randomNumber(),
-        'categoria_id' => 1
+        'categoria_id' => function () {
+            return factory('App\Categoria')->create()->id;
+        }
+    ];
+});
 
+
+$factory->define(App\Categoria::class, function (Faker $faker){
+    return [
+        'nombre' => $faker->word
     ];
 });

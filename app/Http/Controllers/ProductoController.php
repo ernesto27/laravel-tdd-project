@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Categoria;
 use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,8 @@ class ProductoController extends Controller
 
     public function create()
     {
-        return view('productos.create');
+        $categorias = Categoria::active()->get();
+        return view('productos.create', compact('categorias'));
     }
 
     public function store(Request $request)
@@ -35,7 +37,8 @@ class ProductoController extends Controller
     public function edit($id)
     {
         $producto = Producto::findOrFail($id);
-        return view('productos.edit', compact('producto'));
+        $categorias = Categoria::active()->get();
+        return view('productos.edit', compact('producto', 'categorias'));
     }
 
     public function update(Request $request, $id)
