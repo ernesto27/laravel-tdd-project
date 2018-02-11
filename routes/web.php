@@ -23,3 +23,6 @@ Route::post('/register', 'UserController@register')->name('register');
 Route::get('/login', 'UserController@showLogin');
 Route::post('/login', 'UserController@login');
 
+Route::post('/producto', 'ProductoController@store');
+
+
