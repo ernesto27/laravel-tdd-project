@@ -15,6 +15,10 @@ class ComentarioController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'texto' => 'required'
+        ]);
+
         Comentario::create([
             'texto' => $request->get('texto'),
             'producto_id' => $request->get('producto_id'),
