@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Categoria;
+use App\Comentario;
 use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class ProductoController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index', 'show');
     }
 
     public function index(Request $request)
@@ -36,6 +37,13 @@ class ProductoController extends Controller
 
         $categorias = Categoria::active()->get();
         return view('productos.index', compact('productos', 'categorias', 'query'));
+    }
+
+    public function show($id)
+    {
+        $producto = Producto::findOrFail($id);
+        $comentarios = Comentario::where('producto_id', $id)->get();
+        return view('productos.show', compact('producto', 'comentarios'));
     }
 
     public function create()

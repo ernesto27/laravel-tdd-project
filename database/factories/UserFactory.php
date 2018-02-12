@@ -35,9 +35,14 @@ $factory->define(App\Producto::class, function (Faker $faker){
     ];
 });
 
-
 $factory->define(App\Categoria::class, function (Faker $faker){
     return [
         'nombre' => $faker->word
     ];
+});
+
+$factory->define(App\Comentario::class, function (Faker $faker){
+   return [
+     'texto' => $faker->text
+   ];
 });

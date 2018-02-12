@@ -23,9 +23,12 @@ Route::post('/login', 'UserController@login');
 
 
 Route::get('/productos', 'ProductoController@index');
+Route::get('/productos/{id}', 'ProductoController@show');
 Route::get('/producto/create', 'ProductoController@create');
 Route::post('/producto', 'ProductoController@store');
 Route::get('/producto/{id}/edit', 'ProductoController@edit');
 Route::put('/producto/{id}', 'ProductoController@update');
+
+Route::post('/comentarios/productos/{id}', 'ComentarioController@store');
 
 
