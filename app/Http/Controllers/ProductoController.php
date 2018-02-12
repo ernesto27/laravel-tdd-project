@@ -6,6 +6,7 @@ use App\Categoria;
 use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use League\Flysystem\Exception;
 
 class ProductoController extends Controller
 {
@@ -17,10 +18,24 @@ class ProductoController extends Controller
         $this->middleware('auth')->except('index');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::orderBy('id', 'desc')->paginate(self::$pagesCount);
-        return view('productos.index', compact('productos'));
+        $productosFactory = Producto::orderBy('id', 'desc');
+
+        $query = $request->get('categoria');
+        if($query){
+            $productosFactory->byCategoria($query);
+        }
+
+        $productos = $productosFactory->paginate(self::$pagesCount);
+
+
+        if(!count($productos)) {
+            throw new Exception('No productos found');
+        }
+
+        $categorias = Categoria::active()->get();
+        return view('productos.index', compact('productos', 'categorias', 'query'));
     }
 
     public function create()

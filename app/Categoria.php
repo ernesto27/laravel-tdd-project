@@ -10,6 +10,6 @@ class Categoria extends Model
 
     public function scopeActive($query)
     {
-        return $this->where('activo', 1);
+        return $query->where('activo', 1);
     }
 }

@@ -25,7 +25,7 @@ $factory->define(App\User::class, function (Faker $faker) {
 
 $factory->define(App\Producto::class, function (Faker $faker){
     return [
-        'titulo' => $faker->title,
+        'titulo' => $faker->sentence,
         'descripcion' => $faker->text,
         'precio' => $faker->numberBetween(1, 200),
         'cantidad' => $faker->numberBetween(1, 200),
