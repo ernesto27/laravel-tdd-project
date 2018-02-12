@@ -27,8 +27,8 @@ $factory->define(App\Producto::class, function (Faker $faker){
     return [
         'titulo' => $faker->title,
         'descripcion' => $faker->text,
-        'precio' => $faker->randomFloat(),
-        'cantidad' => $faker->randomNumber(),
+        'precio' => $faker->numberBetween(1, 200),
+        'cantidad' => $faker->numberBetween(1, 200),
         'categoria_id' => function () {
             return factory('App\Categoria')->create()->id;
         }

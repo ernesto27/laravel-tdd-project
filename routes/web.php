@@ -21,6 +21,8 @@ Route::get('/login', 'UserController@showLogin')->name('login');
 Route::post('/login', 'UserController@login');
 
 
+
+Route::get('/productos', 'ProductoController@index');
 Route::get('/producto/create', 'ProductoController@create');
 Route::post('/producto', 'ProductoController@store');
 Route::get('/producto/{id}/edit', 'ProductoController@edit');

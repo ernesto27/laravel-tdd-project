@@ -10,10 +10,17 @@ use Illuminate\Support\Facades\Auth;
 class ProductoController extends Controller
 {
 
+    public static $pagesCount = 10;
 
     public function __construct()
     {
-        $this->middleware('auth')->except('create');
+        $this->middleware('auth')->except('index');
+    }
+
+    public function index()
+    {
+        $productos = Producto::orderBy('id', 'desc')->paginate(self::$pagesCount);
+        return view('productos.index', compact('productos'));
     }
 
     public function create()
