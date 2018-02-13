@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -15,7 +16,7 @@ class ProductoTest extends TestCase
     {
 
         $this->signIn();
-        $producto = factory(\App\Producto::class)->make();
+        $producto = factory(\App\Producto::class)->make(['user_id' => Auth::user()->id]);
         $productoArray = $producto->toArray();
 
         $this->post('/producto', $productoArray);

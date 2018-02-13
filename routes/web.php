@@ -30,5 +30,6 @@ Route::get('/producto/{id}/edit', 'ProductoController@edit');
 Route::put('/producto/{id}', 'ProductoController@update');
 
 Route::post('/comentarios/productos/{id}', 'ComentarioController@store');
+Route::post('/comentarios/respuesta/{id}', 'ComentarioController@storeRespuesta');
 
 

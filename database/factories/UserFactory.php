@@ -31,6 +31,9 @@ $factory->define(App\Producto::class, function (Faker $faker){
         'cantidad' => $faker->numberBetween(1, 200),
         'categoria_id' => function () {
             return factory('App\Categoria')->create()->id;
+        },
+        'user_id' => function () {
+            return factory('App\User')->create()->id;
         }
     ];
 });
@@ -43,6 +46,9 @@ $factory->define(App\Categoria::class, function (Faker $faker){
 
 $factory->define(App\Comentario::class, function (Faker $faker){
    return [
-     'texto' => $faker->text
+     'texto' => $faker->text,
+       'user_id' => function () {
+           return factory('App\User')->create()->id;
+       }
    ];
 });
