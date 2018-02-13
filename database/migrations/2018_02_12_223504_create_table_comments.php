@@ -18,6 +18,7 @@ class CreateTableComments extends Migration
             $table->text('texto');
             $table->integer('user_id');
             $table->integer('producto_id');
+            $table->integer('parent_comment_id')->default(0);
             $table->timestamps();
         });
     }

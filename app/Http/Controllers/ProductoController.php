@@ -42,7 +42,8 @@ class ProductoController extends Controller
     public function show($id)
     {
         $producto = Producto::findOrFail($id);
-        $comentarios = Comentario::where('producto_id', $id)->get();
+        $comentarios = Comentario::where('producto_id', $id)->orderByRaw('COALESCE(NULLIF(parent_comment_id,0),id) desc')->get();
+
         return view('productos.show', compact('producto', 'comentarios'));
     }
 

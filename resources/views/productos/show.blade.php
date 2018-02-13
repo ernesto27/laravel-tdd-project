@@ -28,13 +28,22 @@
             </div>
             <button type="submit" class="btn btn-primary mb-2">Agregar</button>
         </form>
-
-        <h2>Comentarios</h2>
-        <ul>
-            @foreach($comentarios as $comentario)
-                <li>{{ $comentario->texto }}</li>
-            @endforeach
-        </ul>
-
     </div>
+
+    <br />
+    <h2>Comentarios</h2>
+
+    @foreach($comentarios as $comentario)
+        <div class="card p-4 mb-3">
+            @if($comentario->parent_comment_id != 0)
+                <p>Respuesta - {{ $comentario->texto }}</p>
+            @else
+                <p><b>Pregunta - {{ $comentario->texto }} </b></p>
+            @endif
+
+        </div>
+
+    @endforeach
+
+
 @endsection
